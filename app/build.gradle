@@ -45,6 +45,24 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+
+    //creating two flavors dev and production
+    flavorDimensions "sg"
+    productFlavors{
+        qa{
+            dimension "sg"
+
+            buildConfigField "String", "BASE_URL_SG_DATA_API", '"https://data.gov.sg/api/"'
+            buildConfigField "String", "RESOURCE_ID", '"a807b7ab-6cad-4aa6-87d0-e283a7353a0f"'
+        }
+
+        prd{
+            dimension "sg"
+
+            buildConfigField "String", "BASE_URL_SG_DATA_API", '"https://data.gov.sg/api/"'
+            buildConfigField "String", "RESOURCE_ID", '"a807b7ab-6cad-4aa6-87d0-e283a7353a0f"'
+        }
+    }
 }
 
 dependencies {
@@ -78,6 +96,9 @@ dependencies {
     // hilt
     implementation "com.google.dagger:hilt-android:2.40"
     kapt "com.google.dagger:hilt-compiler:2.40"
+    kapt "com.google.dagger:hilt-android-compiler:2.38.1"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
+    kapt "androidx.hilt:hilt-compiler:1.0.0"
 
     // retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'
@@ -110,4 +131,12 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.5.0-alpha02'
     // UI Tests
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.1.0'
+    //
+    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
+
+
+    def nav_version = "2.4.1"
+
+    implementation "androidx.navigation:navigation-compose:$nav_version"
+
 }

@@ -32,4 +32,8 @@ class DataUsageRepositoryImpl @Inject constructor(
     override suspend fun insertDataUsageRecord(quarterConsumption: QuarterConsumption) {
         return dao.insertDataUsageRecord(quarterConsumption = quarterConsumption)
     }
+
+    override suspend fun insertAllDataUsageRecords(records:List<QuarterConsumption>){
+        return dao.insertAllDataUsageRecords(records)
+    }
 }

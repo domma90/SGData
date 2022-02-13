@@ -23,6 +23,9 @@ interface DataUsageRecordDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDataUsageRecord(quarterConsumption: QuarterConsumption)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAllDataUsageRecords(consumptions: List<QuarterConsumption>)
+
     @Delete
     suspend fun deleteDataUsageRecord(quarterConsumption: QuarterConsumption)
 

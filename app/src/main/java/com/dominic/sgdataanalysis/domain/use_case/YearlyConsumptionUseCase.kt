@@ -35,9 +35,8 @@ class YearlyConsumptionUseCase @Inject constructor(
                     )
                 }
 
-                dataUsageRecords?.onEach {
-                    yield() /*check whether the coroutine job canceled*/
-                    repository.insertDataUsageRecord(it)
+                if(dataUsageRecords!=null){
+                    repository.insertAllDataUsageRecords(dataUsageRecords)
                 }
 
             }

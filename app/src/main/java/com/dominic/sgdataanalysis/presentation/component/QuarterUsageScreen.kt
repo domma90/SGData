@@ -15,7 +15,7 @@ import com.google.accompanist.pager.rememberPagerState
 @ExperimentalPagerApi
 @Composable
 fun QuarterUsageScreen (
-    year:String?,
+    year:Int,
 ){
     val pagerState = rememberPagerState()
 

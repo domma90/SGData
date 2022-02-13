@@ -16,4 +16,5 @@ interface DataUsageRepository {
 
     suspend fun insertDataUsageRecord(quarterConsumption: QuarterConsumption)
 
+    suspend fun insertAllDataUsageRecords(records: List<QuarterConsumption>)
 }

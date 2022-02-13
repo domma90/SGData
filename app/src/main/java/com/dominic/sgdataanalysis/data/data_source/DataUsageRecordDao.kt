@@ -8,16 +8,16 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface DataUsageRecordDao {
 
-    @Query("SELECT * FROM datausagerecord")
+    @Query("SELECT * FROM quarterconsumption")
     fun getDataUsages(): Flow<List<QuarterConsumption>>
 
-    @Query("SELECT year,SUM(volume) as consumption From datausagerecord GROUP BY year")
+    @Query("SELECT year,SUM(volume) as consumption From quarterconsumption GROUP BY year")
     fun getYearlyUsage():Flow<List<YearlyConsumption>>
 
-    @Query("SELECT * FROM datausagerecord where id = :id")
+    @Query("SELECT * FROM quarterconsumption where id = :id")
     suspend fun getDataUsageRecordById(id:Int): QuarterConsumption?
 
-    @Query("SELECT * FROM datausagerecord where year = :year")
+    @Query("SELECT * FROM quarterconsumption where year = :year")
     fun getDataUsageRecordsByYear(year: Int):Flow<List<QuarterConsumption>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

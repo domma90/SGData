@@ -15,14 +15,14 @@ import com.google.accompanist.pager.rememberPagerState
 @ExperimentalPagerApi
 @Composable
 fun QuarterUsageScreen (
-    navController: NavController,
+    year:String?,
 ){
     val pagerState = rememberPagerState()
 
     HorizontalPager(count = 10, state = pagerState) { page ->
         // Our page content
         Text(
-            text = "Page: $page",
+            text = "Page: $page $year",
             modifier = Modifier.fillMaxWidth()
         )
     }

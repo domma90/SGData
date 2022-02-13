@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class DataUsageRecord(
+data class QuarterConsumption(
     @PrimaryKey val id: Int,
     val year:Int,
     val quarter:String,

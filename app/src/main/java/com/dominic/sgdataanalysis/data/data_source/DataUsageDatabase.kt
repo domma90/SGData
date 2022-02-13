@@ -2,10 +2,10 @@ package com.dominic.sgdataanalysis.data.data_source
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.dominic.sgdataanalysis.domain.model.DataUsageRecord
+import com.dominic.sgdataanalysis.domain.model.QuarterConsumption
 
 @Database(
-    entities = [DataUsageRecord::class],
+    entities = [QuarterConsumption::class],
     version = 1
 )
 abstract class DataUsageDatabase : RoomDatabase() {

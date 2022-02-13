@@ -45,6 +45,22 @@ fun YearlyUsageScreen(
                 Text(text = "On Error")
             }
 
+            is DataUsageUIState.OnYearlyUsageAvailable ->{
+                val data = screenState as DataUsageUIState.OnYearlyUsageAvailable
+
+                LazyColumn(modifier = Modifier.fillMaxSize()) {
+                    items(data.yearlyConsumption) { data ->
+//                        Text(text = data.volume)
+                        UsageItem(
+                            year = data.year.toString(),
+                            usage = data.consumption.toString(),
+                            onClick = {
+                                navController.navigate(Screen.QuarterUsageScreen.route)
+                            })
+                    }
+                }
+            }
+
             is DataUsageUIState.OnDataAvailable -> {
 
                 val data = screenState as DataUsageUIState.OnDataAvailable
@@ -52,7 +68,10 @@ fun YearlyUsageScreen(
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
                     items(data.usageData) { data ->
 //                        Text(text = data.volume)
-                        UsageItem(onClick = {
+                        UsageItem(
+                            year = data.year.toString(),
+                            usage = data.volume.toString(),
+                            onClick = {
                             navController.navigate(Screen.QuarterUsageScreen.route)
                         })
                     }
@@ -65,7 +84,7 @@ fun YearlyUsageScreen(
 }
 
 @Composable
-fun UsageItem(onClick: () -> Unit) {
+fun UsageItem(year:String,usage:String,onClick: () -> Unit) {
     val padding = 8  .dp
 
     Column(
@@ -79,10 +98,10 @@ fun UsageItem(onClick: () -> Unit) {
         Card(elevation = 4.dp) {
             Column() {
 
-                Text(text = "Hi")
+                Text(text = year)
                 Spacer(modifier = Modifier.height(5.dp))
 
-                Text(text = "Hello")
+                Text(text = usage)
             }
         }
 

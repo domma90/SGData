@@ -1,13 +1,9 @@
 package com.dominic.sgdataanalysis.data.repository
 
-import com.dominic.sgdataanalysis.data.data_source.DataUsageDatabase
 import com.dominic.sgdataanalysis.data.data_source.DataUsageRecordDao
-import com.dominic.sgdataanalysis.domain.model.DataUsageRecord
+import com.dominic.sgdataanalysis.domain.model.QuarterConsumption
+import com.dominic.sgdataanalysis.domain.model.YearlyConsumption
 import com.dominic.sgdataanalysis.domain.repository.DataUsageRepository
-import com.dominic.sgdataanalysis.network.DataStoreSearchService
-import com.dominic.sgdataanalysis.repository.DataSource
-import com.dominic.sgdataanalysis.repository.DataUsage
-import com.dominic.sgdataanalysis.repository.DataUsageModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -17,19 +13,23 @@ class DataUsageRepositoryImpl @Inject constructor(
     DataUsageRepository {
 
 
-    override fun getDataUsages(): Flow<List<DataUsageRecord>> {
+    override fun getDataUsages(): Flow<List<QuarterConsumption>> {
         return dao.getDataUsages()
     }
 
-    override suspend fun getDataUsageRecordById(id: Int): DataUsageRecord? {
+    override fun getYearlyUsage(): Flow<List<YearlyConsumption>> {
+        return dao.getYearlyUsage()
+    }
+
+    override suspend fun getDataUsageRecordById(id: Int): QuarterConsumption? {
         return dao.getDataUsageRecordById(id)
     }
 
-    override fun getDataUsageRecordsByYear(year: Int): Flow<List<DataUsageRecord>> {
+    override fun getDataUsageRecordsByYear(year: Int): Flow<List<QuarterConsumption>> {
         return dao.getDataUsageRecordsByYear(year)
     }
 
-    override suspend fun insertDataUsageRecord(dataUsageRecord: DataUsageRecord) {
-        return dao.insertDataUsageRecord(dataUsageRecord = dataUsageRecord)
+    override suspend fun insertDataUsageRecord(quarterConsumption: QuarterConsumption) {
+        return dao.insertDataUsageRecord(quarterConsumption = quarterConsumption)
     }
 }

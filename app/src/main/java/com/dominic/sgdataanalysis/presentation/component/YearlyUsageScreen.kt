@@ -11,20 +11,18 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.dominic.sgdataanalysis.BuildConfig
 import com.dominic.sgdataanalysis.presentation.navigation.Screen
-import com.dominic.sgdataanalysis.viewModel.DataUsageUIState
-import com.dominic.sgdataanalysis.viewModel.DataUsageViewModel
+import com.dominic.sgdataanalysis.viewModel.yearlyConsumption.DataUsageUIState
+import com.dominic.sgdataanalysis.viewModel.yearlyConsumption.YearlyUsageViewModel
 
 @Composable
 fun YearlyUsageScreen(
     navController: NavController,
-    viewModel: DataUsageViewModel = hiltViewModel()
+    viewModel: YearlyUsageViewModel = hiltViewModel()
 ) {
 
     val scaffoldState = rememberScaffoldState()

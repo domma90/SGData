@@ -1,17 +1,16 @@
-package com.dominic.sgdataanalysis.viewModel
+package com.dominic.sgdataanalysis.viewModel.yearlyConsumption
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dominic.sgdataanalysis.domain.use_case.YearlyConsumptionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DataUsageViewModel @Inject constructor(
+class YearlyUsageViewModel @Inject constructor(
     private val dispatcher: CoroutineDispatcher,
     private val yearlyConsumptionUseCase: YearlyConsumptionUseCase
 ) : ViewModel() {

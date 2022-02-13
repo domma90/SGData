@@ -1,4 +1,4 @@
-package com.dominic.sgdataanalysis.dataUsageRepo
+package com.dominic.sgdataanalysis.repository
 
 sealed class DataSource{
     object Api: DataSource()

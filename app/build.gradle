@@ -139,4 +139,17 @@ dependencies {
 
     implementation "androidx.navigation:navigation-compose:$nav_version"
 
+    // compose viewpager
+    implementation "com.google.accompanist:accompanist-pager:0.24.2-alpha"
+
+    // If using indicators, also depend on
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.24.2-alpha"
+
+    //room dependencies
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
+
 }

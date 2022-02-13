@@ -48,10 +48,4 @@ class RetrofitServiceModule {
             .create(DataStoreSearchService::class.java)
     }
 
-    @Provides
-    @Singleton
-    fun provideDispatcher(): CoroutineDispatcher {
-        return Dispatchers.Main
-    }
-
 }

@@ -1,31 +1,31 @@
 package com.dominic.sgdataanalysis.network
-data class DataUsageResponse (
+
+import com.google.gson.annotations.SerializedName
+
+data class DataUsageResponse(
     val help: String,
     val success: Boolean,
     val result: Result
 )
 
-data class Result (
+data class Result(
     val resourceID: String,
-    val fields: List<Field>,
-    val records: List<Record>,
-    val links: Links,
-    val limit: Long,
-    val total: Long
+     val records: List<Record>,
 )
 
-data class Field (
-    val type: String,
-    val id: String
-)
+data class Record(
+    @SerializedName("_id") val id: Int,
+    @SerializedName("quarter") val quarter: String,
+    @SerializedName("volume_of_mobile_data") val volumeOfMobileData: String
+){
+    fun getYear(): Int {
+        return quarter.split("-")[0].toInt()
+    }
 
-data class Links (
-    val start: String,
-    val next: String
-)
+    fun getQuarterValue(): String {
+        return quarter.split("-")[1]
+    }
 
-data class Record (
-    val volumeOfMobileData: String,
-    val quarter: String,
-    val id: Long
-)
+
+
+}

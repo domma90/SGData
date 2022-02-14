@@ -9,6 +9,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.dominic.sgdataanalysis.viewModel.quarterConsumption.QuarterConsumptionViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
@@ -19,6 +21,7 @@ import kotlin.math.absoluteValue
 @Composable
 fun QuarterUsageScreen (
     year:Int,
+    viewModel: QuarterConsumptionViewModel = hiltViewModel()
 ){
     val pagerState = rememberPagerState()
 

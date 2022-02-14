@@ -10,9 +10,11 @@ interface DataUsageRepository {
 
     fun getYearlyUsage():Flow<List<YearlyConsumption>>
 
+    suspend fun getInitialYear():Int
+
     suspend fun getDataUsageRecordById(id:Int): QuarterConsumption?
 
-    fun getDataUsageRecordsByYear(year: Int):Flow<List<QuarterConsumption>>
+    fun getQuarterConsumptionForYear(year: Int):Flow<List<QuarterConsumption>>
 
     suspend fun insertDataUsageRecord(quarterConsumption: QuarterConsumption)
 

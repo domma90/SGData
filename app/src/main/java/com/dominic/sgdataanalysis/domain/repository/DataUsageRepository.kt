@@ -1,5 +1,6 @@
 package com.dominic.sgdataanalysis.domain.repository
 
+import com.dominic.sgdataanalysis.domain.model.GroupedQuarterUsage
 import com.dominic.sgdataanalysis.domain.model.QuarterConsumption
 import com.dominic.sgdataanalysis.domain.model.YearlyConsumption
 import kotlinx.coroutines.flow.Flow
@@ -13,6 +14,8 @@ interface DataUsageRepository {
     suspend fun getInitialYear():Int
 
     suspend fun getDataUsageRecordById(id:Int): QuarterConsumption?
+
+    suspend fun getGroupedQuarterUsage():List<GroupedQuarterUsage>
 
     fun getQuarterConsumptionForYear(year: Int):Flow<List<QuarterConsumption>>
 

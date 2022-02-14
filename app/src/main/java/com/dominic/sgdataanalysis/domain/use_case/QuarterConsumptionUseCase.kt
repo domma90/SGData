@@ -1,5 +1,6 @@
 package com.dominic.sgdataanalysis.domain.use_case
 
+import com.dominic.sgdataanalysis.domain.model.GroupedQuarterUsage
 import com.dominic.sgdataanalysis.domain.model.QuarterConsumption
 import com.dominic.sgdataanalysis.domain.repository.DataUsageRepository
 import kotlinx.coroutines.flow.Flow
@@ -13,5 +14,9 @@ class QuarterConsumptionUseCase @Inject constructor(private val repository: Data
 
     fun getQuarterConsumptionForYear(year: Int): Flow<List<QuarterConsumption>>{
         return repository.getQuarterConsumptionForYear(year = year)
+    }
+
+    suspend fun getGroupedQuarterUsage(): List<GroupedQuarterUsage> {
+        return repository.getGroupedQuarterUsage()
     }
 }

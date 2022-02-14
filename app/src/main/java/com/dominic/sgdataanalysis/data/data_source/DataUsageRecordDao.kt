@@ -15,7 +15,7 @@ interface DataUsageRecordDao {
     @Query("SELECT year,SUM(volume) as consumption From quarterconsumption GROUP BY year")
     fun getYearlyUsage():Flow<List<YearlyConsumption>>
 
-    @Query("SELECT year, group_concat(volume) FROM quarterconsumption GROUP BY year")
+    @Query("SELECT year, group_concat(volume) as volumes FROM quarterconsumption GROUP BY year")
     suspend fun getGroupedQuarterUsage():List<GroupedQuarterUsage>
 
     @Query("SELECT * FROM quarterconsumption where id = :id")

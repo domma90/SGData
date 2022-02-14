@@ -1,6 +1,7 @@
 package com.dominic.sgdataanalysis.data.repository
 
 import com.dominic.sgdataanalysis.data.data_source.DataUsageRecordDao
+import com.dominic.sgdataanalysis.domain.model.GroupedQuarterUsage
 import com.dominic.sgdataanalysis.domain.model.QuarterConsumption
 import com.dominic.sgdataanalysis.domain.model.YearlyConsumption
 import com.dominic.sgdataanalysis.domain.repository.DataUsageRepository
@@ -27,6 +28,10 @@ class DataUsageRepositoryImpl @Inject constructor(
 
     override suspend fun getDataUsageRecordById(id: Int): QuarterConsumption? {
         return dao.getDataUsageRecordById(id)
+    }
+
+    override suspend fun getGroupedQuarterUsage(): List<GroupedQuarterUsage> {
+        return dao.getGroupedQuarterUsage()
     }
 
     override fun getQuarterConsumptionForYear(year: Int): Flow<List<QuarterConsumption>> {

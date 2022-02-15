@@ -15,7 +15,7 @@ class DataUsageRepositoryImpl @Inject constructor(
 
 
     override fun getDataUsages(): Flow<List<QuarterConsumption>> {
-        return dao.getDataUsages()
+        return dao.getAllQuarterUsage()
     }
 
     override fun getYearlyUsage(): Flow<List<YearlyConsumption>> {

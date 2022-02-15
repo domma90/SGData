@@ -56,17 +56,21 @@ fun QuarterUsagePage(quarterUsages: List<GroupedQuarterUsage>, pageNumber: Int) 
 
                     Spacer(modifier = Modifier.height(5.dp))
 
-                    val quarterUsagesMap = quarterUsages[page].mapQuarterUsage
+                    val quarterUsagesMap = quarterUsages[page].getMappedQuarterUsage()
 
-                    if(quarterUsagesMap.isNotEmpty()){
-                        for(key in quarterUsagesMap.keys){
-                            Row() {
-                                Text(key)
-                                Spacer(Modifier.width(10.dp))
-                                Text(quarterUsagesMap[key]?:"")
+                    if(quarterUsagesMap!=null){
+
+                        if(quarterUsagesMap.isNotEmpty()){
+                            for(key in quarterUsagesMap.keys){
+                                Row() {
+                                    Text(key)
+                                    Spacer(Modifier.width(10.dp))
+                                    Text(quarterUsagesMap[key]?:"")
+                                }
                             }
                         }
                     }
+
                 }
             }
         }

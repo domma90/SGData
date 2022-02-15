@@ -21,9 +21,8 @@ fun QuarterUsageScreen (
     year:Int,
     viewModel: QuarterConsumptionViewModel = hiltViewModel()
 ){
-    val uiState = viewModel.uiState
 
-    when(uiState){
+    when(val uiState = viewModel.uiState){
         QCUIState.EmptyState -> viewModel.getUsage(year = year)
         is QCUIState.Error -> {
             Text(text = uiState.message)
@@ -48,10 +47,18 @@ fun QuarterUsagePage(quarterUsages: List<GroupedQuarterUsage>, pageNumber: Int) 
 
                 Text(text = "Year ${quarterUsages[page].year}")
                 Spacer(modifier = Modifier.height(5.dp))
-                Text(
-                    text = "volumes: ${quarterUsages[page].volumes}",
-                    modifier = Modifier.fillMaxWidth()
-                )
+
+                val quarterUsagesMap = quarterUsages[page].mapQuarterUsage
+
+                if(quarterUsagesMap.isNotEmpty()){
+                    for(key in quarterUsagesMap.keys){
+                        Row() {
+                            Text(key)
+                            Spacer(Modifier.width(10.dp))
+                            Text(quarterUsagesMap[key]?:"")
+                        }
+                    }
+                }
             }
         }
     }

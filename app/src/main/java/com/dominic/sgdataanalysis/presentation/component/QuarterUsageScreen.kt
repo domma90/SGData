@@ -1,11 +1,10 @@
 package com.dominic.sgdataanalysis.presentation.component
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Card
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-
-import androidx.compose.material.Text
 import androidx.compose.runtime.LaunchedEffect
+
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -25,7 +24,7 @@ fun QuarterUsageScreen (
     val uiState = viewModel.uiState
 
     when(uiState){
-        QCUIState.EmptyState -> viewModel.retrieveQuarterUsage()
+        QCUIState.EmptyState -> viewModel.getUsage(year = year)
         is QCUIState.Error -> {
             Text(text = uiState.message)
         }
@@ -33,14 +32,14 @@ fun QuarterUsageScreen (
             Text(text = "loading")
         }
         is QCUIState.OnQuarterUsageAvailable -> {
-            QuarterUsagePage(uiState.quarterUsages)
+            QuarterUsagePage(uiState.quarterUsages,uiState.pageNumber)
         }
     }
 }
 
 @ExperimentalPagerApi
 @Composable
-fun QuarterUsagePage(quarterUsages: List<GroupedQuarterUsage>) {
+fun QuarterUsagePage(quarterUsages: List<GroupedQuarterUsage>, pageNumber: Int) {
     val pagerState = rememberPagerState()
 
     HorizontalPager(count = quarterUsages.size,state = pagerState) { page ->
@@ -53,10 +52,11 @@ fun QuarterUsagePage(quarterUsages: List<GroupedQuarterUsage>) {
                     text = "volumes: ${quarterUsages[page].volumes}",
                     modifier = Modifier.fillMaxWidth()
                 )
-//                Text(text = "Consumption $usage")
             }
         }
     }
 
-
+    LaunchedEffect(pagerState){
+        pagerState.animateScrollToPage(pageNumber)
+    }
 }

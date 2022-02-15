@@ -25,7 +25,7 @@ interface DataUsageRecordDao {
     fun getQuarterConsumptionForYear(year: Int):Flow<List<QuarterConsumption>>
 
     @Query("SELECT year from quarterconsumption ORDER BY year ASC LIMIT 1")
-    fun getInitialYear():Int
+    suspend fun getInitialYear():Int
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDataUsageRecord(quarterConsumption: QuarterConsumption)

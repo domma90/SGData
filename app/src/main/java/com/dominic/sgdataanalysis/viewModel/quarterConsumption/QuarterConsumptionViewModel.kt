@@ -16,17 +16,23 @@ class QuarterConsumptionViewModel @Inject constructor(private val dispatcher:Cor
                                                       private val quarterConsumptionUseCase: QuarterConsumptionUseCase
 ) :ViewModel() {
 
+    var initialYear:Int = -1
+
     var uiState by mutableStateOf<QCUIState>(
         QCUIState.EmptyState)
         private set
 
-    fun retrieveQuarterUsage() = viewModelScope.launch(dispatcher){
+    fun getUsage(year:Int) = viewModelScope.launch(dispatcher){
+
+        if(initialYear==-1){
+            initialYear = quarterConsumptionUseCase.getInitialYear()
+        }
 
 
         val entries = quarterConsumptionUseCase.getGroupedQuarterUsage()
 
         uiState = if(entries.isNotEmpty()){
-            QCUIState.OnQuarterUsageAvailable(entries)
+            QCUIState.OnQuarterUsageAvailable(entries,year-initialYear)
         }else{
             QCUIState.Error(message = "Entries not populated")
         }

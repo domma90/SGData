@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -41,27 +42,37 @@ fun QuarterUsageScreen (
 fun QuarterUsagePage(quarterUsages: List<GroupedQuarterUsage>, pageNumber: Int) {
     val pagerState = rememberPagerState()
 
-    HorizontalPager(count = quarterUsages.size,state = pagerState) { page ->
-        Card(elevation = 4.dp, modifier = Modifier.fillMaxWidth()) {
-            Column(modifier = Modifier.padding(16.dp)) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally,verticalArrangement = Arrangement.Center,
+    modifier = Modifier.fillMaxHeight()) {
+        HorizontalPager(count = quarterUsages.size,state = pagerState) { page ->
+            Card(elevation = 4.dp, modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+                .padding(horizontal = 16.dp,vertical = 50.dp)) {
+                Column(modifier = Modifier.padding(16.dp)) {
 
-                Text(text = "Year ${quarterUsages[page].year}")
-                Spacer(modifier = Modifier.height(5.dp))
+                    Text(text = "Year ${quarterUsages[page].year}")
 
-                val quarterUsagesMap = quarterUsages[page].mapQuarterUsage
 
-                if(quarterUsagesMap.isNotEmpty()){
-                    for(key in quarterUsagesMap.keys){
-                        Row() {
-                            Text(key)
-                            Spacer(Modifier.width(10.dp))
-                            Text(quarterUsagesMap[key]?:"")
+                    Spacer(modifier = Modifier.height(5.dp))
+
+                    val quarterUsagesMap = quarterUsages[page].mapQuarterUsage
+
+                    if(quarterUsagesMap.isNotEmpty()){
+                        for(key in quarterUsagesMap.keys){
+                            Row() {
+                                Text(key)
+                                Spacer(Modifier.width(10.dp))
+                                Text(quarterUsagesMap[key]?:"")
+                            }
                         }
                     }
                 }
             }
         }
+
     }
+
 
     LaunchedEffect(pagerState){
         pagerState.animateScrollToPage(pageNumber)

@@ -12,9 +12,6 @@ class QuarterConsumptionUseCase @Inject constructor(private val repository: Data
         return repository.getInitialYear()
     }
 
-    fun getQuarterConsumptionForYear(year: Int): Flow<List<QuarterConsumption>>{
-        return repository.getQuarterConsumptionForYear(year = year)
-    }
 
     suspend fun getGroupedQuarterUsage(): List<GroupedQuarterUsage> {
         return repository.getGroupedQuarterUsage()

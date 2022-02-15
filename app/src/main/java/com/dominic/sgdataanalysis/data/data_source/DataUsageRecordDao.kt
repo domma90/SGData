@@ -9,20 +9,12 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface DataUsageRecordDao {
 
-    @Query("SELECT * FROM quarterconsumption")
-    fun getAllQuarterUsage(): Flow<List<QuarterConsumption>>
 
     @Query("SELECT year,SUM(volume) as consumption From quarterconsumption GROUP BY year")
     fun getYearlyUsage():Flow<List<YearlyConsumption>>
 
     @Query("SELECT year, group_concat(volume) as volumes , group_concat(quarter) as quarters FROM quarterconsumption GROUP BY year")
     suspend fun getGroupedQuarterUsage():List<GroupedQuarterUsage>
-
-    @Query("SELECT * FROM quarterconsumption where id = :id")
-    suspend fun getDataUsageRecordById(id:Int): QuarterConsumption?
-
-    @Query("SELECT * FROM quarterconsumption where year = :year")
-    fun getQuarterConsumptionForYear(year: Int):Flow<List<QuarterConsumption>>
 
     @Query("SELECT year from quarterconsumption ORDER BY year ASC LIMIT 1")
     suspend fun getInitialYear():Int
@@ -33,8 +25,5 @@ interface DataUsageRecordDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllDataUsageRecords(consumptions: List<QuarterConsumption>)
 
-    @Delete
-    suspend fun deleteDataUsageRecord(quarterConsumption: QuarterConsumption)
-
-
 }
+

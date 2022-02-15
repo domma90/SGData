@@ -7,17 +7,13 @@ import kotlinx.coroutines.flow.Flow
 
 interface DataUsageRepository {
 
-    fun getDataUsages(): Flow<List<QuarterConsumption>>
-
     fun getYearlyUsage():Flow<List<YearlyConsumption>>
 
     suspend fun getInitialYear():Int
 
-    suspend fun getDataUsageRecordById(id:Int): QuarterConsumption?
 
     suspend fun getGroupedQuarterUsage():List<GroupedQuarterUsage>
 
-    fun getQuarterConsumptionForYear(year: Int):Flow<List<QuarterConsumption>>
 
     suspend fun insertDataUsageRecord(quarterConsumption: QuarterConsumption)
 

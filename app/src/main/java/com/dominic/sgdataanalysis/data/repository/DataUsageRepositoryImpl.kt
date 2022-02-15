@@ -14,10 +14,6 @@ class DataUsageRepositoryImpl @Inject constructor(
     DataUsageRepository {
 
 
-    override fun getDataUsages(): Flow<List<QuarterConsumption>> {
-        return dao.getAllQuarterUsage()
-    }
-
     override fun getYearlyUsage(): Flow<List<YearlyConsumption>> {
         return dao.getYearlyUsage()
     }
@@ -26,17 +22,12 @@ class DataUsageRepositoryImpl @Inject constructor(
         return dao.getInitialYear()
     }
 
-    override suspend fun getDataUsageRecordById(id: Int): QuarterConsumption? {
-        return dao.getDataUsageRecordById(id)
-    }
+
 
     override suspend fun getGroupedQuarterUsage(): List<GroupedQuarterUsage> {
         return dao.getGroupedQuarterUsage()
     }
 
-    override fun getQuarterConsumptionForYear(year: Int): Flow<List<QuarterConsumption>> {
-        return dao.getQuarterConsumptionForYear(year)
-    }
 
     override suspend fun insertDataUsageRecord(quarterConsumption: QuarterConsumption) {
         return dao.insertDataUsageRecord(quarterConsumption = quarterConsumption)

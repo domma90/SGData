@@ -6,13 +6,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -27,18 +22,15 @@ fun YearlyUsageScreen(
     viewModel: YearlyUsageViewModel = hiltViewModel()
 ) {
 
-    Log.d("", "YearlyUsageScreen: composed ")
-
 //    val scaffoldState = rememberScaffoldState()
 
-    val screenState by viewModel.uiStateFlow.collectAsState(initial = DataUsageUIState.Empty)
+    val uiState = viewModel.uiState
 
-    Log.d("", "YearlyUsageScreen: Screen state is $screenState")
 
-    when (screenState) {
+    when (uiState) {
 
         is DataUsageUIState.Empty -> {
-            viewModel.onUiReady()
+            viewModel.loadYearlyData()
             viewModel.retrieveNewData()
         }
 
@@ -47,14 +39,13 @@ fun YearlyUsageScreen(
         }
 
         is DataUsageUIState.DataError -> {
-            Text(text = "Error ")
+            Text(text =uiState.message)
         }
 
         is DataUsageUIState.OnYearlyUsageAvailable -> {
-            val data = screenState as DataUsageUIState.OnYearlyUsageAvailable
 
             LazyColumn(modifier = Modifier.fillMaxSize()) {
-                items(data.yearlyConsumption) { data ->
+                items(uiState.yearlyConsumption) { data ->
                     UsageItem(
                         year = data.year.toString(),
                         usage = data.consumption.toString(),
@@ -67,15 +58,6 @@ fun YearlyUsageScreen(
         }
 
     }
-
-/*
-    Scaffold(scaffoldState = scaffoldState) {
-
-
-
-
-    }
-*/
 }
 
 @Composable

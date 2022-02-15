@@ -1,6 +1,9 @@
 package com.dominic.sgdataanalysis.viewModel.yearlyConsumption
 
 import android.util.Log
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dominic.sgdataanalysis.domain.use_case.YearlyConsumptionUseCase
@@ -16,20 +19,19 @@ class YearlyUsageViewModel @Inject constructor(
     private val yearlyConsumptionUseCase: YearlyConsumptionUseCase
 ) : ViewModel() {
 
-    private val _uiState = MutableSharedFlow<DataUsageUIState>(replay = 0)
-    val uiStateFlow: SharedFlow<DataUsageUIState> = _uiState.asSharedFlow()
+    var uiState by mutableStateOf<DataUsageUIState>(DataUsageUIState.Empty)
+        private set
 
-    fun onUiReady() = viewModelScope.launch(dispatcher) {
-        _uiState.emit(
-            DataUsageUIState.Loading
-        )
+//    val uiStateFlow: SharedFlow<DataUsageUIState> = _uiState.asSharedFlow()
+
+    fun loadYearlyData() = viewModelScope.launch(dispatcher) {
+        uiState = DataUsageUIState.Loading
+
         yearlyConsumptionUseCase.getYearlyConsumption()
             .catch { e -> DataUsageUIState.DataError(e.toString()) }
             .collect {
-                Log.d("TAG", "onUiReady: sending data ")
-                _uiState.emit(
-                    DataUsageUIState.OnYearlyUsageAvailable(it)
-                )
+                uiState = DataUsageUIState.OnYearlyUsageAvailable(it)
+
             }
     }
 

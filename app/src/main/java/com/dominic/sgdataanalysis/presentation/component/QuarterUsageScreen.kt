@@ -22,7 +22,14 @@ fun QuarterUsageScreen (
     year:Int,
     viewModel: QuarterConsumptionViewModel = hiltViewModel()
 ){
+    Scaffold(content = { body(viewModel = viewModel, year = year)},
+        topBar = { TopAppBar(title = {Text("Quarterly Usage")})  }
+    )
+}
 
+@ExperimentalPagerApi
+@Composable
+fun body(viewModel: QuarterConsumptionViewModel,year: Int,){
     when(val uiState = viewModel.uiState){
         QCUIState.EmptyState -> viewModel.getUsage(year = year)
         is QCUIState.Error -> {
@@ -48,13 +55,13 @@ fun QuarterUsagePage(quarterUsages: List<GroupedQuarterUsage>, pageNumber: Int) 
             Card(elevation = 4.dp, modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
-                .padding(horizontal = 16.dp,vertical = 50.dp)) {
+                .padding(horizontal = 16.dp, vertical = 80.dp)) {
                 Column(modifier = Modifier.padding(16.dp)) {
 
                     Text(text = "Year ${quarterUsages[page].year}")
 
 
-                    Spacer(modifier = Modifier.height(5.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
                     val quarterUsagesMap = quarterUsages[page].getMappedQuarterUsage()
 

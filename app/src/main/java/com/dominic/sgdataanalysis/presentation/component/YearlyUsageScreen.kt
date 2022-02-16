@@ -1,12 +1,13 @@
 package com.dominic.sgdataanalysis.presentation.component
 
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -24,10 +25,17 @@ fun YearlyUsageScreen(
 
 //    val scaffoldState = rememberScaffoldState()
 
-    val uiState = viewModel.uiState
+    Scaffold(content = {body(viewModel,navController)},
+        topBar = { TopAppBar(title = {Text("Yearly Usage")})  }
+    )
 
 
-    when (uiState) {
+}
+
+@Composable
+fun body(viewModel: YearlyUsageViewModel, navController: NavController){
+
+    when (val uiState = viewModel.uiState) {
 
         is DataUsageUIState.Empty -> {
             viewModel.loadYearlyData()
@@ -70,8 +78,6 @@ fun UsageItem(year: String, usage: String, onClick: () -> Unit) {
             .padding(padding)
             .fillMaxWidth()
     ) {
-//        Row(verticalAlignment = Alignment.CenterVertically) { /*...*/ }
-//        Spacer(Modifier.size(padding))
         Card(elevation = 4.dp, modifier = Modifier.fillMaxWidth()) {
             Column(modifier = Modifier.padding(16.dp)) {
 
@@ -81,7 +87,5 @@ fun UsageItem(year: String, usage: String, onClick: () -> Unit) {
                 Text(text = "Consumption $usage")
             }
         }
-
-
     }
 }

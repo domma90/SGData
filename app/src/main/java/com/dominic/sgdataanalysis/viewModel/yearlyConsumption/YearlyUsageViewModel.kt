@@ -1,6 +1,5 @@
 package com.dominic.sgdataanalysis.viewModel.yearlyConsumption
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -21,8 +20,6 @@ class YearlyUsageViewModel @Inject constructor(
 
     var uiState by mutableStateOf<DataUsageUIState>(DataUsageUIState.Empty)
         private set
-
-//    val uiStateFlow: SharedFlow<DataUsageUIState> = _uiState.asSharedFlow()
 
     fun loadYearlyData() = viewModelScope.launch(dispatcher) {
         uiState = DataUsageUIState.Loading

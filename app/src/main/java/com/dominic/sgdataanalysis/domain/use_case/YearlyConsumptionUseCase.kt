@@ -5,14 +5,13 @@ import com.dominic.sgdataanalysis.BuildConfig
 import com.dominic.sgdataanalysis.domain.model.QuarterConsumption
 import com.dominic.sgdataanalysis.domain.model.YearlyConsumption
 import com.dominic.sgdataanalysis.domain.repository.DataUsageRepository
-import com.dominic.sgdataanalysis.network.DataStoreSearchService
+import com.dominic.sgdataanalysis.network.adapter.DataStoreSearchServiceAdapter
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.yield
 import javax.inject.Inject
 
 class YearlyConsumptionUseCase @Inject constructor(
     private val repository: DataUsageRepository,
-    private val service: DataStoreSearchService
+    private val service: DataStoreSearchServiceAdapter
 ) {
 
 
@@ -24,9 +23,9 @@ class YearlyConsumptionUseCase @Inject constructor(
 
         try {
             val data = service.getMobileDataUsage(BuildConfig.RESOURCE_ID)
-            if (data.isSuccessful) {
+            if (data.isCallSuccess) {
 
-                val dataUsageRecords = data.body()?.result?.records?.map { it ->
+                val dataUsageRecords = data.usageRecords?.map { it ->
                     QuarterConsumption(
                         id = it.id,
                         year = it.getYear(),
@@ -38,6 +37,9 @@ class YearlyConsumptionUseCase @Inject constructor(
                 if(dataUsageRecords!=null){
                     repository.insertAllDataUsageRecords(dataUsageRecords)
                 }
+
+            }else{
+                Log.e("", "retrieveLatestData: "+"no data" )
 
             }
         }catch (e:Exception){

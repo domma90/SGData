@@ -41,16 +41,6 @@ class DataUsageDatabaseTest{
         database.close()
     }
 
-    @Test
-    fun insertUsageRecordTest() = runBlocking{
-        val quarterUsage = QuarterConsumption(1,2000,"Q1",1.5f)
-
-        dao.insertDataUsageRecord(quarterConsumption = quarterUsage)
-
-        val quarterUsageRecord = dao.getAllQuarterUsage().first()[0]
-
-        assertEquals(quarterUsage,quarterUsageRecord)
-    }
 
     @Test
     fun insertUsageRecordListTest() = runBlocking{
@@ -58,7 +48,7 @@ class DataUsageDatabaseTest{
         val r2 = QuarterConsumption(2,2001,"Q1",1.5f)
         val r3 = QuarterConsumption(3,2002,"Q1",1.5f)
 
-        var records = listOf(r1, r2, r3)
+        val records = listOf(r1, r2, r3)
 
         dao.insertAllDataUsageRecords(records)
 

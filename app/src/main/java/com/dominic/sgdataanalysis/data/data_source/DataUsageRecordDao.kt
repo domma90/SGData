@@ -9,6 +9,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface DataUsageRecordDao {
 
+    @Query("SELECT * FROM quarterconsumption")
+    fun getAllQuarterUsage(): Flow<List<QuarterConsumption>>
 
     @Query("SELECT year,SUM(volume) as consumption From quarterconsumption GROUP BY year")
     fun getYearlyUsage():Flow<List<YearlyConsumption>>

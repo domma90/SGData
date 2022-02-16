@@ -8,4 +8,5 @@ interface DataStoreSearchService {
     @GET("action/datastore_search")
     suspend fun getMobileDataUsage(@Query("resource_id") resourceId: String?):Response<DataUsageResponse>
 
+
 }

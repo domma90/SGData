@@ -8,9 +8,11 @@ import androidx.test.filters.SmallTest
 import com.dominic.sgdataanalysis.domain.model.GroupedQuarterUsage
 import com.dominic.sgdataanalysis.domain.model.QuarterConsumption
 import com.dominic.sgdataanalysis.domain.model.YearlyConsumption
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
@@ -18,6 +20,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+@ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 @SmallTest
 class DataUsageDatabaseTest{
@@ -58,7 +61,7 @@ class DataUsageDatabaseTest{
     }
 
     @Test
-    fun getYearlyUsage() = runBlocking {
+    fun getYearlyUsage() = runBlockingTest {
         val r1 = QuarterConsumption(1,2000,"Q1",1f)
         val r2 = QuarterConsumption(2,2000,"Q2",1.5f)
         val r3 = QuarterConsumption(3,2000,"Q3",2.5f)

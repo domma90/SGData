@@ -156,7 +156,10 @@ dependencies {
     androidTestImplementation 'androidx.arch.core:core-testing:2.1.0'
     testImplementation 'androidx.arch.core:core-testing:2.1.0'
 
-
-
+    //
+    //Test rules and transitive dependencies:
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose_version")
+    // Needed for createComposeRule, but not createAndroidComposeRule:
+    debugImplementation("androidx.compose.ui:ui-test-manifest:$compose_version")
 
 }

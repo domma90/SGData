@@ -53,6 +53,12 @@ class QuarterConsumptionViewModelTest {
     fun testEmptyState() = runBlockingTest{
         assertEquals(QCUIState.EmptyState,viewModel.uiState)
 
+
+
+    }
+
+    @Test
+    fun testQuarterUsage() = runBlockingTest{
         val r1 = QuarterConsumption(1,2000,"Q1",1f)
         val r2 = QuarterConsumption(2,2000,"Q2",1.5f)
         val r3 = QuarterConsumption(3,2000,"Q3",2.5f)
@@ -77,9 +83,7 @@ class QuarterConsumptionViewModelTest {
         val expected = QCUIState.OnQuarterUsageAvailable(groupedUsageList,1)
 
         assertEquals(expected,viewModel.uiState)
-
     }
-
 
     @After
     fun tearDown() {

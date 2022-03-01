@@ -26,6 +26,7 @@ class AppModule {
             DataUsageDatabase.DATABASE_NAME
         ).build()
     }
+
 /*
     @Provides
     @Singleton

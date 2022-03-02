@@ -23,7 +23,12 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+
+            // Enables resource shrinking, which is performed by the
+            // Android Gradle plugin.
+            shrinkResources true
+
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -161,5 +166,12 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose_version")
     // Needed for createComposeRule, but not createAndroidComposeRule:
     debugImplementation("androidx.compose.ui:ui-test-manifest:$compose_version")
+
+    // MockK
+    def mockk_version = "1.12.3"
+
+    testImplementation("io.mockk:mockk:$mockk_version")
+    androidTestImplementation("io.mockk:mockk-android:$mockk_version")
+
 
 }

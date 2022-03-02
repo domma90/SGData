@@ -53,8 +53,6 @@ class QuarterConsumptionViewModelTest {
     fun testEmptyState() = runBlockingTest{
         assertEquals(QCUIState.EmptyState,viewModel.uiState)
 
-
-
     }
 
     @Test
